@@ -1,0 +1,35 @@
+body {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: #e6c7c7;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  font-family: serif;
+  font-size: 30px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  font-family: serif;
+  border: none;
+  border-bottom: 2px solid #ccc;
+}
+
+input:focus-visible {
+  outline: none;
+  border-bottom: 2px solid #6c6;
+}
+
+p {
+  font-size: 20px;
+  font-family: serif;
+  margin: 20px;
+  text-align: center;
+}

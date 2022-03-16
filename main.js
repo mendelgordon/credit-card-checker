@@ -1,3 +1,4 @@
+/* Here are some sample arrays of valid, invalid, and unknown credit card numbers, and an array of all of these arrays
 // All valid credit card numbers
 const valid1 = [4, 5, 3, 9, 6, 7, 7, 9, 0, 8, 0, 1, 6, 8, 0, 8];
 const valid2 = [5, 5, 3, 5, 7, 6, 6, 7, 6, 8, 7, 5, 1, 4, 3, 9];
@@ -38,67 +39,109 @@ const batch = [
   mystery5,
 ];
 
-// Add your functions below:
+// Functions are below
+*/
+
+// Validate credit card numbers
 const validateCred = arr => {
-  let temp = arr.slice().reverse();
-  for (let i = 1; i < temp.length; i += 2) {
-    temp[i] *= 2;
-    if (temp[i] > 9) {
-      temp[i] -= 9;
-    }
-  }
-  const result =
-    temp
-      .slice()
-      .reverse()
-      .reduce((a, b) => a + b) %
-      10 ===
-    0;
-  return result;
-};
-const findInvalidCards = arrays => {
-  let invalidCards = [];
-  for (const arr of arrays) {
-    if (!validateCred(arr)) {
-      invalidCards.push(arr);
-    }
-  }
-  return invalidCards;
-};
-const idInvalidCardCompanies = arrays => {
-  let companies = [];
-  for (const i of arrays) {
-    switch (i[0]) {
-      case 3:
-        if (!companies.includes('Amex')) {
-          companies.push('Amex');
-        }
-        break;
-      case 4:
-        if (!companies.includes('Visa')) {
-          companies.push('Visa');
-        }
-        break;
-      case 5:
-        if (!companies.includes('Mastercard')) {
-          companies.push('Mastercard');
-        }
-        break;
-      case 6:
-        if (!companies.includes('Discover')) {
-          companies.push('Discover');
-        }
-        break;
-      default:
-        if (!companies.includes('Company not found')) {
-          companies.push('Company not found');
-        }
-        break;
-    }
-  }
-  return companies;
+   let temp = arr.slice().reverse();
+   for (let i = 1; i < temp.length; i += 2) {
+      temp[i] *= 2;
+      if (temp[i] > 9) {
+         temp[i] -= 9;
+      }
+   }
+   const result =
+      temp
+         .slice()
+         .reverse()
+         .reduce((a, b) => a + b) %
+         10 ===
+      0;
+   return result;
 };
 
+// Return cards that are invalid
+const findInvalidCards = arrays => {
+   let invalidCards = [];
+   for (const arr of arrays) {
+      if (!validateCred(arr)) {
+         invalidCards.push(arr);
+      }
+   }
+   return invalidCards;
+};
+
+// Return list of companies that issued invalid cards
+const idInvalidCardCompanies = arrays => {
+   let companies = [];
+   for (const i of arrays) {
+      switch (i[0]) {
+         case 3:
+            if (!companies.includes('Amex')) {
+               companies.push('Amex');
+            }
+            break;
+         case 4:
+            if (!companies.includes('Visa')) {
+               companies.push('Visa');
+            }
+            break;
+         case 5:
+            if (!companies.includes('Mastercard')) {
+               companies.push('Mastercard');
+            }
+            break;
+         case 6:
+            if (!companies.includes('Discover')) {
+               companies.push('Discover');
+            }
+            break;
+         default:
+            if (!companies.includes('Company not found')) {
+               companies.push('Company not found');
+            }
+            break;
+      }
+   }
+   return companies;
+};
+
+/* Use parseInt to convert credit card numbers to arrays with numbers. */
+const convertString = creditCardNumber => {
+   let newArr = [];
+   for (const i of creditCardNumber) {
+      newArr.push(parseInt(i));
+   }
+   return newArr;
+};
+
+// Easier way to validate one card
+const validate = creditCardNumber => {
+   let newArr = convertString(creditCardNumber);
+   return validateCred(newArr);
+};
+
+// Tell users if their number is valid or not
+const input = document.querySelector('#number');
+const output = document.querySelector('#result');
+const valid = () => {
+   let creditCardNumber = input.value;
+   let result = validate(creditCardNumber);
+   if (result) {
+      output.innerHTML = 'Valid';
+      output.style.color = 'green';
+   } else {
+      output.innerHTML = 'Invalid';
+      output.style.color = 'red';
+   }
+};
+// When the user types in an input, run the function
+window.onload = () => {
+   input.addEventListener('keyup', valid);
+};
+
+/*
 // Test functions:
 console.log(validateCred(valid1)); // Should print true
 console.log(validateCred(invalid1)); // Should print false
@@ -110,3 +153,4 @@ console.log(findInvalidCards(batch)); // Test what the mystery numbers are
 console.log(idInvalidCardCompanies([invalid1])); // Should print['visa']
 console.log(idInvalidCardCompanies([invalid2])); // Should print ['mastercard']
 console.log(idInvalidCardCompanies(batch)); // Find out which companies have mailed out invalid cards
+*/
