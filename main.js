@@ -136,10 +136,15 @@ const valid = () => {
       output.style.color = 'red';
    }
 };
+// Prevent users from entering invalid characters
+const invalidChars = [
+  "-",
+  "+",
+  "e",
+];
+input.addEventListener("keydown", e => invalidChars.includes(e.key) && e.preventDefault());
 // When the user types in an input, run the function
-window.onload = () => {
-   input.addEventListener('keyup', valid);
-};
+input.addEventListener('keyup', valid);
 
 /*
 // Test functions:
